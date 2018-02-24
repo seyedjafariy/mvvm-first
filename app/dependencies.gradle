@@ -1,0 +1,166 @@
+def dependencyGroup(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+def testLibs = dependencyGroup {
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.+'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+def support = dependencyGroup {
+
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-vector-drawable:26.1.0'
+}
+
+def lifeCycle = dependencyGroup {
+
+    implementation 'android.arch.lifecycle:runtime:1.1.0'
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0'
+}
+
+def dagger = dependencyGroup {
+
+    implementation 'com.google.dagger:dagger:2.13'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+
+    implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'javax.annotation:jsr250-api:1.0'
+}
+
+def daggerAndroid = dependencyGroup {
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.13'
+    implementation 'com.google.dagger:dagger-android-support:2.13'
+}
+
+def butterKnife = dependencyGroup {
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+}
+
+def retrofit = dependencyGroup {
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+}
+
+def fresco = dependencyGroup {
+    implementation 'com.facebook.fresco:fresco:1.5.0'
+    implementation 'jp.wasabeef:fresco-processors:2.1.0'
+    implementation 'com.github.stfalcon:frescoimageviewer:0.5.0'
+}
+
+def timber = dependencyGroup {
+    implementation 'com.jakewharton.timber:timber:4.6.0'
+}
+
+def ui = dependencyGroup {
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
+    implementation 'at.blogc:expandabletextview:1.0.5'
+}
+
+def recycler = dependencyGroup {
+    implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
+    implementation 'org.zakariya.stickyheaders:stickyheaders:0.7.6'
+}
+
+def leakCanary = dependencyGroup {
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+}
+
+def autoValue = dependencyGroup {
+//    implementation 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.6'
+
+    //AUTOVALUE
+
+    annotationProcessor 'com.google.auto.value:auto-value:1.5'
+    provided 'com.jakewharton.auto.value:auto-value-annotations:1.5'
+
+    //WITH
+    annotationProcessor 'com.gabrielittner.auto.value:auto-value-with:1.0.0'
+
+    //GSON
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.7.0'
+    implementation 'com.ryanharter.auto.value:auto-value-gson-annotations:0.7.0'
+
+    //REDACTED
+    annotationProcessor 'com.squareup.auto.value:auto-value-redacted:1.0.1'
+
+    //PARCEL
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.6'
+//    Optionally for TypeAdapter support
+//    compile 'com.ryanharter.auto.value:auto-value-parcel-adapter:0.2.6'
+
+}
+
+def rxJava = dependencyGroup {
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.f2prateek.rx.receivers:rx-receivers:0.1.0'
+}
+
+def rxBinding = dependencyGroup {
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.1.0'
+}
+
+def imageSlider = dependencyGroup {
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.amstronghuang.slider:library:1.1.3@aar'
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testLibs()
+
+    support()
+
+    lifeCycle()
+
+    butterKnife()
+
+    leakCanary()
+
+    autoValue()
+
+    //push and analytics
+//    analytics()
+
+    retrofit()
+
+    ui()
+
+    recycler()
+
+    fresco()
+
+    dagger()
+
+    daggerAndroid()
+
+    rxJava()
+
+    rxBinding()
+
+    timber()
+
+//    imageSlider()
+
+
+}
