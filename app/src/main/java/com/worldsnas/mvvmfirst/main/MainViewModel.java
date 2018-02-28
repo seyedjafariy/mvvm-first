@@ -3,7 +3,7 @@ package com.worldsnas.mvvmfirst.main;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.worldsnas.mvvmfirst.repos.LoadMainReposUseCase;
+import com.worldsnas.mvvmfirst.model.MainReposResponse;
 import com.worldsnas.mvvmfirst.repos.LoadMainUseCase;
 import com.worldsnas.mvvmfirst.rx.SchedulersFacade;
 
@@ -11,28 +11,25 @@ import io.reactivex.disposables.CompositeDisposable;
 
 class MainViewModel extends ViewModel {
 
-
-    private final LoadMainReposUseCase mLoadMainReposUseCase;
+    private final MainUseCase mMainReposUseCase;
 
     private final SchedulersFacade schedulersFacade;
 
-    private final CompositeDisposable disposables = new CompositeDisposable();
+    private final CompositeDisposable mDisposable;
 
     private final MutableLiveData<MainReposResponse> response = new MutableLiveData<>();
 
-    MainViewModel(LoadMainReposUseCase loadMainReposUseCase,
-                  SchedulersFacade schedulersFacade) {
-        this.mLoadMainReposUseCase = loadMainReposUseCase;
+    MainViewModel(MainUseCase mainUseCase,
+                  SchedulersFacade schedulersFacade,
+                  CompositeDisposable disposable) {
+        this.mMainReposUseCase = mainUseCase;
         this.schedulersFacade = schedulersFacade;
+        mDisposable = disposable;
     }
 
     @Override
     protected void onCleared() {
-        disposables.clear();
-    }
-
-    void loadMainRepos() {
-        loadRepos(mLoadMainReposUseCase);
+        mDisposable.clear();
     }
 
     MutableLiveData<MainReposResponse> response() {
@@ -40,7 +37,7 @@ class MainViewModel extends ViewModel {
     }
 
     private void loadRepos(LoadMainUseCase loadMainUseCase) {
-        disposables.add(loadMainUseCase.execute()
+        mDisposable.add(loadMainUseCase.execute()
                 .subscribeOn(schedulersFacade.io())
                 .observeOn(schedulersFacade.ui())
                 .doOnSubscribe(__ -> response.setValue(MainReposResponse.loading()))

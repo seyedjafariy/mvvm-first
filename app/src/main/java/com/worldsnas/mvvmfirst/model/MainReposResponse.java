@@ -1,17 +1,14 @@
-package com.worldsnas.mvvmfirst.main;
+package com.worldsnas.mvvmfirst.model;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.worldsnas.mvvmfirst.api.Status;
+import com.worldsnas.mvvmfirst.app.api.Status;
 
-import static com.worldsnas.mvvmfirst.api.Status.FAILED;
-import static com.worldsnas.mvvmfirst.api.Status.LOADING;
-import static com.worldsnas.mvvmfirst.api.Status.SUCCESS;
+import static com.worldsnas.mvvmfirst.app.api.Status.FAILED;
+import static com.worldsnas.mvvmfirst.app.api.Status.LOADING;
+import static com.worldsnas.mvvmfirst.app.api.Status.SUCCESS;
 
-/**
- * MainReposResponse holder provided to the UI
- */
 public class MainReposResponse {
 
     @Status.APIStatus

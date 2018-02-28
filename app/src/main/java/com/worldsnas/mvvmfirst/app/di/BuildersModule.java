@@ -1,4 +1,4 @@
-package com.worldsnas.mvvmfirst.di;
+package com.worldsnas.mvvmfirst.app.di;
 
 import com.worldsnas.mvvmfirst.main.MainActivity;
 import com.worldsnas.mvvmfirst.main.MainModule;

@@ -4,21 +4,26 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.worldsnas.mvvmfirst.repos.LoadMainReposUseCase;
 import com.worldsnas.mvvmfirst.rx.SchedulersFacade;
+
+import javax.inject.Inject;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 
 class MainViewModelFactory implements ViewModelProvider.Factory {
 
-    private final LoadMainReposUseCase mLoadMainReposUseCase;
+    @Inject
+    MainUseCase mMainReposUseCase;
 
-    private final SchedulersFacade schedulersFacade;
+    @Inject
+    SchedulersFacade schedulersFacade;
 
-    MainViewModelFactory(LoadMainReposUseCase loadMainReposUseCase,
-                         SchedulersFacade schedulersFacade) {
+    @Inject
+    CompositeDisposable mDisposable;
 
-        this.mLoadMainReposUseCase = loadMainReposUseCase;
-        this.schedulersFacade = schedulersFacade;
+    @Inject
+    MainViewModelFactory() {
     }
 
     @NonNull
@@ -26,7 +31,7 @@ class MainViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(MainViewModel.class)) {
-            return (T) new MainViewModel(mLoadMainReposUseCase, schedulersFacade);
+            return (T) new MainViewModel(mMainReposUseCase, schedulersFacade, mDisposable);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

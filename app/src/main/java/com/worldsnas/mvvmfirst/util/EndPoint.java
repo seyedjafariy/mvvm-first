@@ -1,4 +1,4 @@
-package com.worldsnas.mvvmfirst;
+package com.worldsnas.mvvmfirst.util;
 
  public class EndPoint {
 

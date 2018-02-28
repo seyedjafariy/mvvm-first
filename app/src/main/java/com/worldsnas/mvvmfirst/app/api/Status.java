@@ -1,4 +1,4 @@
-package com.worldsnas.mvvmfirst.api;
+package com.worldsnas.mvvmfirst.app.api;
 
 import android.support.annotation.IntDef;
 
